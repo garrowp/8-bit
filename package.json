@@ -1,21 +1,32 @@
 {
-  "name": "8bit-cra",
+  "name": "8-bit",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "framer-motion": "^2.9.4",
+    "prism-react-renderer": "^1.1.1",
     "react": "^17.0.1",
+    "react-color": "^2.19.3",
     "react-dom": "^17.0.1",
+    "react-hotkeys-hook": "^2.4.0",
+    "react-icons": "^3.11.0",
     "react-scripts": "4.0.0",
+    "react-toast-notifications": "^2.4.0",
+    "react-use-clipboard": "^1.0.2",
     "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "serve": "^11.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [

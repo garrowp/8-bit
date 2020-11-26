@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react'
+import { useHotkeys } from 'react-hotkeys-hook'
+import { ToastProvider } from 'react-toast-notifications'
 
-function App() {
+import './App.css'
+
+import { AppProvider } from './context/AppProvider'
+import { Grid } from './components/Grid'
+import { ColorPicker } from './components/ColorPicker'
+import { BentoMenu } from './components/BentoMenu'
+import { Tools } from './components/Tools'
+import { CodeDrawer } from './components/CodeDrawer'
+
+export default function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false)
+  const [codeDrawerOpen, setCodeDrawerOpen] = React.useState(false)
+  const toggleCodeDrawer = () => setCodeDrawerOpen(!codeDrawerOpen)
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+  useHotkeys(
+    'escape',
+    () => {
+      if (menuOpen) {
+        toggleMenu()
+      }
+      if (codeDrawerOpen) {
+        toggleCodeDrawer()
+      }
+    },
+    [menuOpen, codeDrawerOpen]
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        height: '100vh',
+        width: '100vw',
+        overflow: 'hidden',
+        position: 'relative',
+      }}
+    >
+      <ToastProvider
+        autoDismiss
+        autoDismissTimeout={3000}
+        placement='bottom-center'
+      >
+        <AppProvider>
+          <Grid />
+          <BentoMenu menuOpen={menuOpen} toggleMenu={toggleMenu} />
+          <ColorPicker menuOpen={menuOpen} />
+          <Tools menuOpen={menuOpen} />
+          <CodeDrawer
+            codeDrawerOpen={codeDrawerOpen}
+            toggleCodeDrawer={toggleCodeDrawer}
+          />
+        </AppProvider>
+      </ToastProvider>
     </div>
-  );
+  )
 }
-
-export default App;
