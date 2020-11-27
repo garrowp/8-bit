@@ -87,10 +87,12 @@ function popFromHistoryToRedoHistory(history, redoHistory) {
   const newHistory = [...history]
   const lastItemInHistory = newHistory.pop()
   const newGrid = newHistory[newHistory.length - 1]
+  const newData = exportData(newGrid)
   return {
     grid: newGrid,
     history: newHistory,
     redoHistory: [...redoHistory, lastItemInHistory],
+    exportData: newData,
   }
 }
 
@@ -102,10 +104,12 @@ function propFromRedoHistoryToHistory(history, redoHistory) {
   const newRedoHistory = [...redoHistory]
   const lastItemInRedoHistory = newRedoHistory.pop()
   const newGrid = lastItemInRedoHistory
+  const newData = exportData(newGrid)
   return {
     grid: newGrid,
     history: [...history, lastItemInRedoHistory],
     redoHistory: newRedoHistory,
+    data: newData,
   }
 }
 
@@ -119,11 +123,11 @@ function appReducer(state, action) {
           state.toolType,
           action
         )
-        const newData = exportData(newGrid)
+        // const newData = exportData(newGrid)
         return {
           ...state,
           grid: newGrid,
-          exportData: newData,
+          // exportData: newData,
         }
       }
       return state
@@ -135,11 +139,13 @@ function appReducer(state, action) {
       }
     }
     case 'MOUSE_UP': {
+      const newData = exportData(state.grid)
       return {
         ...state,
         clicked: false,
         history: pushToHistory(state.history, state.grid),
         redoHistory: [],
+        exportData: newData,
       }
     }
     case 'UNDO': {
@@ -175,7 +181,7 @@ function appReducer(state, action) {
     case 'CLEAR_GRID': {
       const initialGrid = makeGrid(state.rows, state.cols)
       const newData = exportData(initialGrid)
-      console.log({newData})
+      console.log({ newData })
       return {
         ...state,
         grid: initialGrid,
