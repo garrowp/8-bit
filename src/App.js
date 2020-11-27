@@ -30,18 +30,18 @@ export default function App() {
   )
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vw',
-        overflow: 'hidden',
-        position: 'relative',
-      }}
+    <ToastProvider
+      autoDismiss
+      autoDismissTimeout={3000}
+      placement='bottom-center'
     >
-      <ToastProvider
-        autoDismiss
-        autoDismissTimeout={3000}
-        placement='bottom-center'
+      <div
+        style={{
+          height: '100vh',
+          width: '100vw',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
       >
         <AppProvider>
           <Grid />
@@ -53,7 +53,7 @@ export default function App() {
             toggleCodeDrawer={toggleCodeDrawer}
           />
         </AppProvider>
-      </ToastProvider>
-    </div>
+      </div>
+    </ToastProvider>
   )
 }
