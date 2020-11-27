@@ -174,6 +174,24 @@ function SVGImage({ data, size = cellSize }) {
   const height = data.height * size
   const width = data.width * size
 
+  const svgString = `<svg
+  height="${height}px"
+  width="${width}px"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  ${data.items.map((item) => {
+    return `<rect
+        x="${item.x * size}px"
+        y="${item.y * size}px"
+        width="${size}px"
+        height="${size}px"
+        fill="${item.fill}"
+      />`
+  })}
+</svg>`
+  const imgSrc = `data:image/svg+xml;utf8,${svgString}`
+
   return (
     <div
       style={{
@@ -183,25 +201,7 @@ function SVGImage({ data, size = cellSize }) {
         placeItems: 'center',
       }}
     >
-      <svg
-        height={height}
-        width={width}
-        version='1.1'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        {data.items.map((item) => {
-          return (
-            <rect
-              key={`${item.x}-${item.y}`}
-              x={item.x * size}
-              y={item.y * size}
-              width={size}
-              height={size}
-              fill={item.fill}
-            />
-          )
-        })}
-      </svg>
+      <img src={imgSrc} alt='SVG Preview' />
     </div>
   )
 }
