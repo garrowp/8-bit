@@ -39,6 +39,7 @@ export default function App() {
         style={{
           overflow: 'hidden',
           position: 'relative',
+          maxHeight: '100%'
         }}
       >
         <AppProvider>

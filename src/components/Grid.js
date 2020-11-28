@@ -34,6 +34,7 @@ function Grid({ state }) {
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
         overflow: "hidden",
+        maxHeight: '100vh',
       }}
     >
       {grid && grid.map((row, rowIndex) => {
