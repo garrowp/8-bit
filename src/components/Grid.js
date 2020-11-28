@@ -33,8 +33,6 @@ function Grid({ state }) {
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
         gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
-        height: "100vh",
-        width: "100vw",
         overflow: "hidden",
       }}
     >

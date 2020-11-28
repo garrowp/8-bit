@@ -272,20 +272,29 @@ function CodeDrawer({ state: data, codeDrawerOpen, toggleCodeDrawer }) {
         width: '100%',
         height: 250,
 
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '1em',
-
         background: '#fff',
         boxShadow: '-1px 0px 10px rgba(100,100,100,.5)',
         padding: '0 1em',
       }}
     >
       <OpenCodeDrawerButton onClick={toggleCodeDrawer} />
-      <SVGImage data={data} size={10} />
-      <JSONData data={data} />
-      <SVGData data={data} />
-      <Component />
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, minmax(200px, 1fr))',
+          gap: '1em',
+
+          overflowX: 'scroll'
+        }}
+      >
+        <SVGImage data={data} size={10} />
+        <JSONData data={data} />
+        <SVGData data={data} />
+        <Component />
+      </div>
     </motion.div>
   )
 }
